@@ -2,95 +2,120 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Crypto Market & Trading</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Crypto Mobile Dashboard</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white min-h-screen">
-
-  <!-- Navbar -->
-  <nav class="flex justify-between items-center px-8 py-4 bg-opacity-10 backdrop-blur-lg shadow-md sticky top-0 z-50">
-    <h1 class="text-2xl font-bold text-green-400">CryptoTrade</h1>
-    <ul class="flex gap-6 text-sm md:text-base">
-      <li><a href="#" class="hover:text-green-300">Market</a></li>
-      <li><a href="#" class="hover:text-green-300">Trading</a></li>
-      <li><a href="#" class="hover:text-green-300">Portfolio</a></li>
-      <li><a href="#" class="hover:text-green-300">Login</a></li>
-    </ul>
-  </nav>
+<body class="bg-gradient-to-br from-indigo-900 via-purple-900 to-black text-white min-h-screen pb-20">
 
   <!-- Hero Section -->
-  <section class="text-center py-24 px-6 md:px-20">
-    <h2 class="text-4xl md:text-6xl font-bold leading-tight mb-6">Trade Crypto Confidently</h2>
-    <p class="text-gray-300 mb-10 text-lg md:text-xl">Real-time market data, secure trading, and powerful analytics.</p>
-    <a href="#" class="bg-green-500 hover:bg-green-600 text-white py-3 px-6 rounded-full font-semibold transition">Get Started</a>
-  </section>
+  <section class="text-center p-6">
+    <!-- Hero Section with Crypto Trading Image -->
+<section class="text-center p-6">
+  <!-- 📈 Crypto / Trading Image -->
+  <img 
+    src="https://images.unsplash.com/photo-1624438254080-3f3e4e72bdfb?auto=format&fit=crop&w=1200&q=80" 
+    alt="Crypto Trading Dashboard" 
+    class="rounded-xl shadow-lg mx-auto mb-4 w-full max-w-md"
+  />
 
-  <!-- Market Overview Section -->
-  <section class="px-6 md:px-20 py-10 bg-black bg-opacity-20 rounded-t-3xl">
-    <h3 class="text-2xl font-bold mb-6 text-center">Top Market Coins</h3>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-      <div class="bg-gray-800 p-6 rounded-xl shadow-md">
-        <h4 class="text-xl font-semibold">Bitcoin (BTC)</h4>
-        <p class="text-green-400 mt-2">$64,000 <span class="text-sm text-green-300">+2.4%</span></p>
-      </div>
-      <div class="bg-gray-800 p-6 rounded-xl shadow-md">
-        <h4 class="text-xl font-semibold">Ethereum (ETH)</h4>
-        <p class="text-green-400 mt-2">$3,500 <span class="text-sm text-green-300">+1.8%</span></p>
-      </div>
-      <div class="bg-gray-800 p-6 rounded-xl shadow-md">
-        <h4 class="text-xl font-semibold">Solana (SOL)</h4>
-        <p class="text-green-400 mt-2">$145 <span class="text-sm text-red-400">-0.6%</span></p>
-      </div>
+  <!-- 🧾 Headline with Description -->
+  <h1 class="text-2xl font-bold text-green-400 mt-2">Trade Smarter with Real-Time Data</h1>
+  <p class="text-gray-300 mt-1 text-sm">
+    View live market prices, track your coins, and manage your portfolio – all in one place.
+  </p>
+</section>
+
+  <!-- Live Price List -->
+  <section class="max-w-3xl mx-auto px-4">
+    <div class="bg-gray-900 rounded-xl shadow-lg overflow-y-auto max-h-[400px] border border-gray-700">
+      <ul id="crypto-list" class="divide-y divide-gray-800">
+        <!-- Real-time coin prices will load here -->
+      </ul>
     </div>
   </section>
-<section id="crypto-prices" class="px-6 md:px-20 py-10">
-  <h3 class="text-2xl font-bold mb-6 text-center">Live Crypto စျေးနှုန်းများ</h3>
-  <div id="price-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-    <!-- Live prices will be loaded here -->
+
+  <!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 text-white shadow-inner">
+  <div class="flex justify-around items-center text-center text-sm py-3">
+    <button class="flex flex-col items-center text-green-400">
+      🏠
+      <span>Home</span>
+    </button>
+    <button class="flex flex-col items-center hover:text-green-400">
+      👤
+      <span>Profile</span>
+    </button>
+    <button class="flex flex-col items-center hover:text-green-400">
+      📊
+      <span>Trade</span>
+    </button>
+    <button class="flex flex-col items-center hover:text-green-400">
+      📜
+      <span>Record</span>
+    </button>
+    <button class="flex flex-col items-center hover:text-green-400">
+      👜
+      <span>Wallet</span>
+    </button>
   </div>
-</section>
-  <!-- Footer -->
-  <footer class="mt-16 py-8 bg-black bg-opacity-30 text-center text-gray-400 text-sm">
-    <script>
-  const priceContainer = document.getElementById("price-container");
+</nav>
 
-  async function fetchPrices() {
-    try {
-      const response = await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd&include_24hr_change=true");
-      const data = await response.json();
+  <!-- JS for Real-Time Prices -->
+  <script>
+    const coinList = [
+      { id: "bitcoin", name: "BTC/USDT" },
+      { id: "ethereum", name: "ETH/USDT" },
+      { id: "solana", name: "SOL/USDT" },
+      { id: "binancecoin", name: "BNB/USDT" },
+      { id: "ripple", name: "XRP/USDT" },
+      { id: "cardano", name: "ADA/USDT" },
+      { id: "dogecoin", name: "DOGE/USDT" },
+      { id: "polkadot", name: "DOT/USDT" },
+      { id: "litecoin", name: "LTC/USDT" },
+      { id: "avalanche-2", name: "AVAX/USDT" },
+      { id: "chainlink", name: "LINK/USDT" },
+      { id: "bitcoin", name: "BTC/USD", isDuplicate: true }
+    ];
 
-      const coins = [
-        { id: 'bitcoin', name: 'Bitcoin (BTC)' },
-        { id: 'ethereum', name: 'Ethereum (ETH)' },
-        { id: 'solana', name: 'Solana (SOL)' }
-      ];
+    async function loadPrices() {
+      try {
+        const ids = [...new Set(coinList.map(coin => coin.id))].join(",");
+        const url = `https://api.coingecko.com/api/v3/simple/price?ids=${ids}&vs_currencies=usd&include_24hr_change=true`;
 
-      priceContainer.innerHTML = '';
+        const res = await fetch(url);
+        const data = await res.json();
 
-      coins.forEach(coin => {
-        const price = data[coin.id].usd;
-        const change = data[coin.id].usd_24h_change.toFixed(2);
-        const changeColor = change >= 0 ? 'text-green-400' : 'text-red-400';
+        const container = document.getElementById("crypto-list");
+        container.innerHTML = "";
 
-        priceContainer.innerHTML += `
-          <div class="bg-gray-800 p-6 rounded-xl shadow-md">
-            <h4 class="text-xl font-semibold">${coin.name}</h4>
-            <p class="text-white mt-2 text-lg">$${price.toLocaleString()} <span class="text-sm ${changeColor}">${change}%</span></p>
-          </div>
-        `;
-      });
+        coinList.forEach(coin => {
+          const price = data[coin.id]?.usd?.toLocaleString() || "N/A";
+          const change = data[coin.id]?.usd_24h_change?.toFixed(2) || "0.00";
+          const isUp = parseFloat(change) >= 0;
+          const changeColor = isUp ? "text-green-400" : "text-red-400";
+          const changeSymbol = isUp ? "▲" : "▼";
 
-    } catch (error) {
-      priceContainer.innerHTML = '<p class="text-red-400">ဒေတာများ တင်ရာတွင် ပြဿနာရှိနေပါသည်။</p>';
-      console.error('Price fetch error:', error);
+          container.innerHTML += `
+            <li class="p-4 flex justify-between items-center hover:bg-gray-800 transition">
+              <span class="font-medium">${coin.name}</span>
+              <div class="text-right">
+                <div class="text-lg font-semibold">$${price}</div>
+                <div class="text-sm ${changeColor}">${changeSymbol} ${change}%</div>
+              </div>
+            </li>
+          `;
+        });
+
+      } catch (error) {
+        console.error("Price error:", error);
+        document.getElementById("crypto-list").innerHTML = `<li class="p-4 text-red-400">Failed to load prices...</li>`;
+      }
     }
-  }
-  fetchPrices();
-  setInterval(fetchPrices, 60000);
-</script>
-    &copy; 2025 CryptoTrade. All rights reserved.
-  </footer>
+
+    loadPrices();
+    setInterval(loadPrices, 60000);
+  </script>
 
 </body>
 </html>
