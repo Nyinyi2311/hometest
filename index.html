@@ -1,0 +1,79 @@
+// src/App.jsx
+import React from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Home, BarChart, ShoppingCart, Clock, User } from "lucide-react";
+
+const data = [
+  { symbol: "BTC/USDT", price: "118657.99", change: "+0.57%" },
+  { symbol: "ETH/USDT", price: "3862.91", change: "+1.70%" },
+  { symbol: "BTC/USD", price: "118657.99", change: "+0.57%" },
+  { symbol: "EOS/USDT", price: "0.8549", change: "+3.45%" },
+  { symbol: "DOGE/USDT", price: "0.223522", change: "+0.94%" },
+  { symbol: "BCH/USDT", price: "582.06", change: "+2.25%" },
+  { symbol: "LTC/USDT", price: "110.58", change: "+1.09%" },
+];
+
+export default function App() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-[#0f172a] via-[#1e2a47] to-[#2b2f4c] text-white font-sans">
+      <div className="max-w-md mx-auto p-4">
+        <div className="flex justify-between items-center mb-6">
+          <div className="text-xl font-bold">Balance: <span className="text-cyan-400">17000.00</span></div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4 mb-6">
+          {['Recharge', 'Withdraw', 'Message', 'About us'].map((label, i) => (
+            <div
+              key={i}
+              className="bg-white/10 text-center rounded-xl py-4 backdrop-blur shadow-md hover:bg-white/20 cursor-pointer transition"
+            >
+              {label}
+            </div>
+          ))}
+        </div>
+
+        <Tabs defaultValue="btc" className="mb-6">
+          <TabsList className="grid grid-cols-3 bg-white/10 backdrop-blur">
+            <TabsTrigger value="btc">BTC/USDT</TabsTrigger>
+            <TabsTrigger value="eth">ETH/USDT</TabsTrigger>
+            <TabsTrigger value="eos">EOS/USDT</TabsTrigger>
+          </TabsList>
+        </Tabs>
+
+        <Card className="bg-white/5 shadow-cyan-500/20">
+          <CardContent className="p-4">
+            <table className="w-full text-left">
+              <thead>
+                <tr className="text-cyan-400">
+                  <th>Symbol</th>
+                  <th>Latest Price</th>
+                  <th>24h Change</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data.map((coin, i) => (
+                  <tr key={i} className="border-b border-white/10">
+                    <td className="py-2">{coin.symbol}</td>
+                    <td className="py-2">{coin.price}</td>
+                    <td className="py-2 text-green-400">{coin.change}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </CardContent>
+        </Card>
+      </div>
+
+      <div className="fixed bottom-0 left-0 w-full bg-white/10 backdrop-blur border-t border-white/10">
+        <div className="flex justify-around py-2 text-xs">
+          <div className="flex flex-col items-center text-cyan-400"><Home size={18} />Home</div>
+          <div className="flex flex-col items-center"><BarChart size={18} />Markets</div>
+          <div className="flex flex-col items-center"><ShoppingCart size={18} />Trade</div>
+          <div className="flex flex-col items-center"><Clock size={18} />Record</div>
+          <div className="flex flex-col items-center"><User size={18} />Mine</div>
+        </div>
+      </div>
+    </div>
+  );
+}
